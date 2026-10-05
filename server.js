@@ -1,17 +1,35 @@
-const express = require("express");
-const path = require("path");
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
 
-const app = express();
+const PORT = process.env.PORT || 3000;
 
-const PORT = 3000;
+const server = http.createServer((req, res) => {
 
-// Serve static files
-app.use(express.static(__dirname));
+```
+const filePath = path.join(__dirname, 'index.html');
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "index.html"));
+fs.readFile(filePath, (err, data) => {
+
+    if (err) {
+        res.writeHead(500, {
+            'Content-Type': 'text/plain'
+        });
+
+        res.end('Error loading website');
+        return;
+    }
+
+    res.writeHead(200, {
+        'Content-Type': 'text/html'
+    });
+
+    res.end(data);
+});
+```
+
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Website running on port ${PORT}`);
+server.listen(PORT, () => {
+console.log(`Server running on port ${PORT}`);
 });
