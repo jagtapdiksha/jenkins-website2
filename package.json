@@ -1,0 +1,12 @@
+{
+  "name": "jenkins-website2",
+  "version": "1.0.0",
+  "description": "Website deployed using Jenkins and Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
